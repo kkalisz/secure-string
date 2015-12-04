@@ -6,9 +6,6 @@ import pl.kalisz.kamil.secure.utils.ValueValidatorUtils;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by T420 on 2015-11-20.
- */
 public class SecureStringTest
 {
     private static final String VALUE_TO_ENCRYPT = "Some secret value";

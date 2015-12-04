@@ -7,9 +7,9 @@ import pl.kalisz.kamil.secure.utils.ValueValidatorUtils;
 
 public abstract class SecureMethodTest<V extends SecureMethod>
 {
-    private String MY_STRING_VALUE = "MY_STRING_VALUE";
+    private final String MY_STRING_VALUE = "MY_STRING_VALUE";
 
-    public abstract V createMethod();
+    protected abstract V createMethod();
 
     protected V secureMethod;
 

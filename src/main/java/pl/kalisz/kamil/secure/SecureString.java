@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class SecureString implements Serializable {
 
-    public static final String CHARSET_NAME = "UTF-8";
+    private static final String CHARSET_NAME = "UTF-8";
 
     private static SecureMethod createSecureMethod() throws IllegalAccessException, InstantiationException {
         SecureRandom secureRandom = new SecureRandom();
@@ -52,7 +52,7 @@ public class SecureString implements Serializable {
     }
 
 
-    private final static byte[] toBytes(char[] chars) {
+    private static byte[] toBytes(char[] chars) {
         if (chars == null) {
             return null;
         }

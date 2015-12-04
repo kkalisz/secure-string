@@ -10,9 +10,9 @@ import java.security.SecureRandom;
  */
 public class AesSecureMethod implements SecureMethod {
 
-    public static final String ALGORITHM = "AES/CBC/PKCS5PADDING";
-    public static final int KEY_SIZE = 128;
-    public static final String TYPE = "AES";
+    private static final String ALGORITHM = "AES/CBC/PKCS5PADDING";
+    private static final int KEY_SIZE = 128;
+    private static final String TYPE = "AES";
 
     private Cipher encodeCipher;
 

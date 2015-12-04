@@ -8,7 +8,7 @@ import java.io.IOException;
  */
 public class BlowFishSecureMethod implements SecureMethod
 {
-    public static final String BLOWFISH = "Blowfish";
+    private static final String BLOWFISH = "Blowfish";
 
     private Cipher encodeCipher;
 

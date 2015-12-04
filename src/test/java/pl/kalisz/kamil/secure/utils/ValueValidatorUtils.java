@@ -11,7 +11,7 @@ import java.util.Arrays;
  */
 public class ValueValidatorUtils {
 
-    static int MAX_DEPTH = 5;
+    private static final int MAX_DEPTH = 5;
     public static void assertNoValue(String valueToFind, Object objectToSearchIn) {
         try {
             assertInternal(valueToFind, objectToSearchIn,0);
@@ -43,7 +43,7 @@ public class ValueValidatorUtils {
                 if (field.getType() == String.class) {
                     String objectToValidate = (String) field.get(objectToSearchIn);
                     if (objectToValidate.equals(objectToSearchIn)) {
-                        Assert.fail(String.format("Value %s found in object %s", field.getName()));
+                        Assert.fail(String.format("Value %s found in object %s", objectToValidate,field.getName()));
                     }
                 } else if (field.getType() == byte[].class) {
                     field.setAccessible(true);

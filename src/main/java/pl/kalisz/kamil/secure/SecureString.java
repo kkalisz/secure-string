@@ -22,13 +22,21 @@ public class SecureString implements Serializable {
 
     private static final String CHARSET_NAME = "UTF-8";
 
-    private static SecureMethod createSecureMethod() throws IllegalAccessException, InstantiationException {
-        SecureRandom secureRandom = new SecureRandom();
-        List<Class<? extends SecureMethod>> SECURE_METHODS = new ArrayList<Class<? extends SecureMethod>>();
-        SECURE_METHODS.add(AesSecureMethod.class);
-        SECURE_METHODS.add(BlowFishSecureMethod.class);
-        SECURE_METHODS.add(DesSecureMethod.class);
-        return SECURE_METHODS.get(Math.abs(secureRandom.nextInt(SECURE_METHODS.size() - 1))).newInstance();
+    private static SecureMethod createSecureMethod()
+    {
+        try {
+            SecureRandom secureRandom = new SecureRandom();
+            List<Class<? extends SecureMethod>> SECURE_METHODS = new ArrayList<Class<? extends SecureMethod>>();
+            SECURE_METHODS.add(AesSecureMethod.class);
+            SECURE_METHODS.add(BlowFishSecureMethod.class);
+            SECURE_METHODS.add(DesSecureMethod.class);
+            return SECURE_METHODS.get(Math.abs(secureRandom.nextInt(SECURE_METHODS.size() - 1))).newInstance();
+        }
+        catch (Exception e)
+        {
+            // nothing
+        }
+        return null;
     }
 
     private SecureMethod secureMethod;
@@ -93,5 +101,35 @@ public class SecureString implements Serializable {
             return secureMethod.decode();
         }
         return null;
+    }
+
+    public void addValue(String valueToAdd) {
+        addValue(toBytes(valueToAdd));
+    }
+
+    public void addValue(byte [] valueToAdd)
+    {
+        if(valueToAdd == null)
+        {
+            return;
+        }
+        byte [] decoded = getValue();
+        secureMethod = createSecureMethod();
+        if(decoded != null)
+        {
+            byte[] combined = new byte[decoded.length + valueToAdd.length];
+
+            System.arraycopy(decoded,0,combined,0,decoded.length);
+            System.arraycopy(valueToAdd,0,combined,decoded.length,valueToAdd.length);
+            Arrays.fill(decoded,(byte) 0);
+            Arrays.fill(valueToAdd,(byte) 0);
+            valueToAdd = combined;
+        }
+        secureMethod.encode(valueToAdd);
+        Arrays.fill(valueToAdd,(byte) 0);
+    }
+
+    public void addValue(char [] valueToAdd) {
+        addValue(toBytes(valueToAdd));
     }
 }

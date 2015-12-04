@@ -11,9 +11,31 @@ public class SecureStringTest
     private static final String VALUE_TO_ENCRYPT = "Some secret value";
 
     @Test
-    public void whenCreateSecureStringValueCanBeDecoded()
+    public void whenCreateSecureStringFromStringValueCanBeDecoded()
     {
         SecureString secureString = new SecureString(new StringBuffer(VALUE_TO_ENCRYPT).toString());
+
+        byte [] decodedValue = secureString.getValue();
+        String expected = new String(decodedValue);
+
+        Assert.assertEquals(expected,VALUE_TO_ENCRYPT);
+    }
+
+    @Test
+    public void whenCreateSecureStringFromCharArrayValueCanBeDecoded()
+    {
+        SecureString secureString = new SecureString(new StringBuffer(VALUE_TO_ENCRYPT).toString().toCharArray());
+
+        byte [] decodedValue = secureString.getValue();
+        String expected = new String(decodedValue);
+
+        Assert.assertEquals(expected,VALUE_TO_ENCRYPT);
+    }
+
+    @Test
+    public void whenCreateSecureStringFromByteArrayValueCanBeDecoded()
+    {
+        SecureString secureString = new SecureString(new StringBuffer(VALUE_TO_ENCRYPT).toString().getBytes());
 
         byte [] decodedValue = secureString.getValue();
         String expected = new String(decodedValue);

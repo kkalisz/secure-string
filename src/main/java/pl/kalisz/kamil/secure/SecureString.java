@@ -51,7 +51,6 @@ public class SecureString implements Serializable {
         this(toBytes(valueToEncrypt));
     }
 
-
     private static byte[] toBytes(char[] chars) {
         if (chars == null) {
             return null;
